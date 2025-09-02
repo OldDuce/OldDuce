@@ -1,0 +1,417 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(90deg, #000000ff, #1A150F, #000000ff);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer {
+    height: 310px;
+    width: 100%;
+    background: linear-gradient(180deg, #000000ff, #aa000023, #000000ff);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 30vw);
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    column-gap: 3vw;
+}
+
+.link {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #bd956eff;
+    border: 1px solid #6e5e4dff;
+    padding: 5px;
+    border-radius: 5px;
+    height: 300px;
+}
+
+.header {
+    height: 100px;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: #1A150F;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 10px;
+}
+.logo img{
+    height: 52px;
+    width: 80px;
+}
+
+.main-tag {
+    background-color: #664F3D;
+    border-radius: 20px;
+    width: 300px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 800;
+    margin-left: 10px;
+    color: #1A150F;
+    box-shadow: 4px 2px 2px rgba(53, 1, 1, 0.2);
+}
+
+.main-conteiner {
+    background: linear-gradient(90deg, #000000ff, #1A150F, #000000ff);
+    width: 100%;
+    min-height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Панель управления сверху */
+.controls-panel-top {
+    width: 90vw;
+    background: #1C1210;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.measurement-info {
+    flex: 1;
+}
+
+.measurement-info h3 {
+    margin: 0 0 15px 0;
+    color: #93816D;
+    font-size: 18px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding: 8px;
+    background: #3F4835;
+    border-radius: 6px;
+}
+
+.info-item span:first-child {
+    font-weight: 500;
+    color: #93816D;
+}
+
+.info-item span:last-child {
+    font-weight: 600;
+    color: #93816D;
+}
+
+.info-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.control-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    background: #3F4835;
+    color: #93816D;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+}
+
+.control-btn:hover {
+    background: #93816D;
+    color: #3F4835;
+    transform: translateY(-1px);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+.control-btn#clear-points {
+    background: #3F4835;
+}
+
+.control-btn#clear-points:hover {
+    background: #93816D;
+    color: #3F4835;
+}
+
+.control-btn#toggle-measure.active {
+    background: #3F4835;
+}
+
+.control-btn#toggle-measure.active:hover {
+    background: #93816D;
+    color: #3F4835;
+}
+
+.control-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.control-btn:disabled:hover {
+    background: #3F4835;
+    transform: none;
+}
+
+/* Кнопки масштабирования сверху */
+.zoom-controls-top {
+    display: flex;
+    gap: 10px;
+}
+
+.zoom-controls-top .zoom-btn {
+    width: 45px;
+    height: 45px;
+    background: #A2988C;
+    border: 2px solid #524232;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.zoom-controls-top .zoom-btn:hover {
+    background: #3F4835;
+    color: white;
+    border-color: #3F4835;
+    transform: translateY(-2px);
+}
+
+/* Контейнер карты */
+.map-conteiner {
+    width: 90vw;
+    height: 70vh;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #ccc;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    background: #A2988C;
+    border-radius: 8px;
+}
+
+.map-conteiner.dragging {
+    cursor: grabbing;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.map-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+    transform-origin: 0 0; /* Важно для правильного масштабирования */
+}
+
+.map {
+    display: block; /* Убираем лишние отступы */
+    max-width: none; /* Убираем ограничение максимальной ширины */
+    max-height: none; /* Убираем ограничение максимальной высоты */
+    width: auto; /* Сохраняем исходную ширину */
+    height: auto; /* Сохраняем исходную высоту */
+    pointer-events: none;
+}
+
+/* Стили для точек и измерений */
+.points-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    transform: translate(0, 0); /* Важно: убираем любые трансформации */
+}
+
+.point {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid white;
+    transform: translate(-50%, -50%); /* Центрируем точку */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 10;
+    transform-origin: center; /* Важно для правильного масштабирования */
+}
+
+.point.green {
+    background: #4CAF50;
+}
+
+.point.red {
+    background: #F44336;
+}
+
+.point::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.point-label {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    transform-origin: center; /* Для правильного масштабирования */
+    z-index: 11; /* Чтобы label был над точкой */
+}
+
+/* Исправленные стили для линии измерения */
+.measurement-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 4;
+    display: none;
+    transform-origin: 0 0;
+}
+
+.measurement-line::before {
+    content: '';
+    position: absolute;
+    background: #2196F3;
+    height: 3px;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.measurement-line::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 0 6px 10px;
+    border-color: transparent transparent transparent #2196F3;
+    transform: translateY(-50%);
+}
+
+.point-label {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.point-label::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid rgba(0, 0, 0, 0.8);
+}
+
+.measure-instructions {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    z-index: 25;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-left: 4px solid #2196F3;
+    max-width: 200px;
+}
+
+.measure-instructions strong {
+    color: #3F4835;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .controls-panel-top {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .info-buttons {
+        flex-direction: column;
+    }
+    
+    .zoom-controls-top {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .map-conteiner {
+        height: 60vh;
+    }
+    
+}
